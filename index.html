@@ -6,22 +6,22 @@
   <meta name="description" content="EchoDistill: Bidirectional Concept Distillation for One-Step Diffusion Personalization">
   <title>EchoDistill: Bidirectional Concept Distillation for One-Step Diffusion Personalization</title>
 
-  <!-- Fonts & Styles -->
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
   <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.4/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <style>
     body { font-family: "Google Sans", system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans", sans-serif; }
     .publication-title { word-break: break-word; }
-    .author-block a { text-decoration: none; }
     .publication-links .button { margin: .25rem; }
+    .hero { padding-top: 2rem; padding-bottom: 2rem; }
+    pre { overflow-x: auto; }
   </style>
 
   <link rel="icon" href="./static/images/favicon.svg">
 </head>
 <body>
 
-<!-- Minimal Navbar -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -33,38 +33,58 @@
   <div class="navbar-menu">
     <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
       <a class="navbar-item" href="#">Home</a>
+      <a class="navbar-item" href="#abstract">Abstract</a>
+      <a class="navbar-item" href="#method">Method</a>
+      <a class="navbar-item" href="#results">Results</a>
+      <a class="navbar-item" href="#bibtex">BibTeX</a>
     </div>
   </div>
 </nav>
 
-<!-- Header / Title -->
 <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">EchoDistill: Bidirectional Concept Distillation for One-Step Diffusion Personalization</h1>
+          <h1 class="title is-1 publication-title">
+            EchoDistill: Bidirectional Concept Distillation for One-Step Diffusion Personalization
+          </h1>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Yixiong Yang</span>,
-            <span class="author-block">Tao Wu</span>,
-            <span class="author-block">Senmao Li</span>,
-            <span class="author-block">Shiqi Yang</span>,
-            <span class="author-block">Yaxing Wang</span>,
-            <span class="author-block">Joost van de Weijer</span>,
-            <span class="author-block">Kai Wang</span>
+            <span class="author-block">Yixiong Yang<sup>1,*</sup></span>,
+            <span class="author-block">Tao Wu<sup>2,*</sup></span>,
+            <span class="author-block">Senmao Li<sup>3</sup></span>,
+            <span class="author-block">Shiqi Yang<sup>3,†</sup></span>,
+            <span class="author-block">Yaxing Wang<sup>3</sup></span>,
+            <span class="author-block">Joost van de Weijer<sup>2</sup></span>,
+            <span class="author-block">Kai Wang<sup>4,5,2,✉</sup></span>
+          </div>
+
+          <div class="is-size-6 has-text-grey">
+            <div class="mt-2">
+              <span><sup>1</sup> Harbin Institute of Technology (Shenzhen), China</span>
+              <span><sup>2</sup> Computer Vision Center, Universitat Autònoma de Barcelona, Spain</span><br>
+              <span><sup>3</sup> VCIP, CS, Nankai University, China</span>
+              <span><sup>4</sup> City University of Hong Kong (Dongguan), China</span>
+              <span><sup>5</sup> City University of Hong Kong, HK SAR, China</span>
+            </div>
+            <div class="mt-3">
+              <span><sup>*</sup> Equal contribution.</span>
+              <span><sup>†</sup> Visiting researcher in Nankai University.</span>
+              <span><sup>✉</sup> Corresponding authors.</span>
+            </div>
           </div>
 
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="ai ai-arxiv"></i></span>
                   <span>arXiv</span>
                 </a>
               </span>
               <span class="link-block">
-                <a href="" class="external-link button is-normal is-rounded is-dark">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
                 </a>
@@ -78,17 +98,102 @@
   </div>
 </section>
 
-<!-- (Optional) Add your own content sections here -->
+<section class="section hero is-light" id="abstract">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+    <div class="content has-text-justified">
+      <p>
+        Recent advances in accelerating text-to-image (T2I) diffusion models have enabled the synthesis of 
+        high-fidelity images even in a single step. However, personalizing these models to incorporate novel concepts 
+        remains a challenge due to the limited capacity of one-step models to capture new concept distributions 
+        effectively. We propose a bidirectional concept distillation framework, <strong>EchoDistill</strong>, to enable 
+        one-step diffusion personalization (1-SDP). Our approach involves an end-to-end training process where a 
+        multi-step diffusion model (teacher) and a one-step diffusion model (student) are trained simultaneously. 
+        The concept is first distilled from the teacher model to the student, and then echoed back from the student 
+        to the teacher. During EchoDistill, we share the text encoder between the two models to ensure consistent 
+        semantic understanding. The student model is further optimized with adversarial losses to align with real image distributions and 
+        alignment losses to maintain consistency with the teacher's outputs. Furthermore, we introduce a bidirectional 
+        echoing refinement strategy, where the student model leverages its faster generation capability to provide 
+        feedback to the teacher model. This collaborative distillation mechanism enhances the student's ability to 
+        personalize novel concepts while also improving the generative quality of the teacher model. Our experiments 
+        demonstrate that this framework significantly outperforms existing personalization methods in the 1-SDP setup, 
+        establishing a new paradigm for rapid and effective personalization in T2I diffusion models.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="method">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Method</h2>
+    <figure class="image is-16by9" style="margin-bottom: 0.75rem;">
+      <img src="./static/images/method2.jpg" alt="Overview of EchoDistill">
+    </figure>
+    <p class="has-text-grey">
+      <strong>Figure 1.</strong> Overview of EchoDistill. The student and teacher jointly learn the new concept with a shared text encoder.
+      The teacher learns from real images (green), and the text encoder is updated accordingly. The student is optimized with two objectives (gold):
+      an adversarial loss to match real data distribution and alignment losses to match the denoised outputs of the teacher.
+      The discriminators are trained to distinguish between the student's outputs and real images.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="results">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Results</h2>
+
+    <figure class="image" style="margin-bottom: 0.75rem;">
+      <img src="./static/images/comparisons.jpg" alt="Comparisons with existing methods">
+    </figure>
+    <p class="has-text-grey"><strong>Figure 2.</strong> Our method compared with existing methods.</p>
+
+    <figure class="image" style="margin-top:1.5rem; margin-bottom: 0.75rem;">
+      <img src="./static/images/concept101_1.jpg" alt="CustomConcept101 Part 1">
+    </figure>
+    <p class="has-text-grey"><strong>Figure 3.</strong> Qualitative results on CustomConcept101 dataset (Part 1).</p>
+
+    <figure class="image" style="margin-top:1.5rem; margin-bottom: 0.75rem;">
+      <img src="./static/images/concept101_2.jpg" alt="CustomConcept101 Part 2">
+    </figure>
+    <p class="has-text-grey"><strong>Figure 4.</strong> Qualitative results on CustomConcept101 dataset (Part 2).</p>
+  </div>
+</section>
+
+<section class="section" id="bibtex">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@misc{yang2025echodistill,
+  title         = {EchoDistill: Bidirectional Concept Distillation for One-Step Diffusion Personalization},
+  author        = {Yixiong Yang and Tao Wu and Senmao Li and Shiqi Yang and Yaxing Wang and Joost van de Weijer and Kai Wang},
+  eprint        = {XXXX.XXXXX},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  year          = {2025}
+}</code></pre>
+  </div>
+</section>
 
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <p>Template borrowed from <a href="https://nerfies.github.io/">https://nerfies.github.io/</a></p>
+      <p>Website template adapted from <a href="https://nerfies.github.io/">Nerfies</a>. We thank the authors for their open-source contribution.</a></p>
     </div>
   </div>
 </footer>
 
-<!-- Minimal scripts (no analytics) -->
 <script defer src="./static/js/fontawesome.all.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.navbar-burger');
+    const menu = document.querySelector('.navbar-menu');
+    if (burger && menu) {
+      burger.addEventListener('click', () => {
+        burger.classList.toggle('is-active');
+        menu.classList.toggle('is-active');
+      });
+    }
+  });
+</script>
 </body>
 </html>
